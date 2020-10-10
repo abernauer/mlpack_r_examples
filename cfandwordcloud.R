@@ -108,4 +108,12 @@ model_output <- cf(training = ratings_train,
 # model 
 cf_model <- model_output$output_model
 
-ouput 
+output <- cf(input_model = cf_model,
+            query = matrix(1),
+            recommendations = 10,
+            verbose = TRUE)
+
+cat("Recommendations for user 1:\n")
+for (i in 1:10) {
+  cat(" ", i,  ":", as.character(movies[output$output[i], 3]), "\n")
+}
