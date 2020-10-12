@@ -121,7 +121,13 @@ for (i in 1:10) {
 # need to check that the movie ids are equal then display the ratings
 # rework this and additionally use set key to join the data frames
 # use set key function on movieId or userId then join on those columns
+
+setkey(movies, movieId)
+setkey(ratings, movieId)
+
+Result <- movies[ratings, nomatch=0]
+
 cat("Ratings for user 1:\n")
 for (i in 1:10) {
-cat(" ", i, ":", as.character(movies[output$output[i], 3]), ":", as.character(ratings[ratings$rating, 3]), "\n")
+cat(" ", i, ":", as.character(Result[.(output$output[i]), round(mean(rating), digits = 1)]), "-", as.character(movies[output$output[i], 3]), "\n")
 }
